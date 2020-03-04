@@ -1,3 +1,6 @@
+namespace SpriteKind {
+    export const key = SpriteKind.create()
+}
 namespace myTiles {
     //% blockIdentity=images._tile
     export const tile0 = img`
@@ -343,24 +346,6 @@ b b b b b b b b b b b b b b b b
 b b b b 1 1 1 1 1 1 1 b b b b b 
 b b b b b b b b b b 1 1 1 1 1 1 
 `, true)
-    scene.setTile(7, img`
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-1 1 1 1 1 b b b b b b b b b b b 
-b b b b 1 1 1 1 1 1 1 1 1 1 b b 
-b b b b b b b b b b b b b b 1 1 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-1 1 1 1 1 b b b b b b b b b b b 
-b b b b 1 1 1 1 1 1 b b b b b b 
-b b b b b b b b b 1 1 1 1 1 1 1 
-b b b b b b b b b b b b b b b b 
-b b b b b b b b b b b b b b b b 
-1 1 1 1 1 b b b b b b b b b b b 
-b b b b 1 1 1 1 1 1 1 b b b b b 
-b b b b b b b b b b 1 1 1 1 1 1 
-`, false)
     scene.setTile(14, img`
 e e f e e e e e e e e e e e e e 
 e e e e e e e e e f e e e e e e 
@@ -379,6 +364,24 @@ f f f f f f f f f f f f f f f f
 e e e e e e e e e e e e e e f f 
 e e e e e f e e e e e e e e e e 
 `, false)
+    scene.setTile(7, img`
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+1 1 1 1 1 b b b b b b b b b b b 
+b b b b 1 1 1 1 1 1 1 1 1 1 b b 
+b b b b b b b b b b b b b b 1 1 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+1 1 1 1 1 b b b b b b b b b b b 
+b b b b 1 1 1 1 1 1 b b b b b b 
+b b b b b b b b b 1 1 1 1 1 1 1 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+1 1 1 1 1 b b b b b b b b b b b 
+b b b b 1 1 1 1 1 1 1 b b b b b 
+b b b b b b b b b b 1 1 1 1 1 1 
+`, true)
     scene.setTile(1, img`
 e e e e e e e e e e e e e e e e 
 e e e e e e e e e e e e e e e e 
@@ -396,7 +399,7 @@ f f 3 f f f f 3 3 3 f e f f f f
 e e 3 e e e e e e e e e e e e e 
 e e 3 e e e e e e e e e e e e e 
 e e e e e e e e e e e e e e e e 
-`, false)
+`, true)
 }
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
     Carlos.destroy()
@@ -421,13 +424,16 @@ function key_1 () {
 . . . . . . . . . 1 1 . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
-`, SpriteKind.Food)
+`, SpriteKind.key)
     kays.setPosition(500, 400)
     kays.say("Key 1")
     kays.setKind(SpriteKind.Food)
 }
-sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+sprites.onOverlap(SpriteKind.Player, SpriteKind.key, function (sprite, otherSprite) {
     info.changeScoreBy(1)
+    kay_3.destroy()
+    kays_2.destroy()
+    kays.destroy()
 })
 function key_2 () {
     kays_2 = sprites.create(img`
@@ -447,10 +453,50 @@ function key_2 () {
 . . . . . . . . . 1 1 . . . . . 
 . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . 
-`, SpriteKind.Food)
+`, SpriteKind.key)
     kays_2.setPosition(100, 550)
     kays_2.say("Key 2")
     kays_2.setKind(SpriteKind.Food)
+}
+function Key_unlocks () {
+    if (info.score() == 3) {
+        scene.setTile(7, img`
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+1 1 1 1 1 b b b b b b b b b b b 
+b b b b 1 1 1 1 1 1 1 1 1 1 b b 
+b b b b b b b b b b b b b b 1 1 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+1 1 1 1 1 b b b b b b b b b b b 
+b b b b 1 1 1 1 1 1 b b b b b b 
+b b b b b b b b b 1 1 1 1 1 1 1 
+b b b b b b b b b b b b b b b b 
+b b b b b b b b b b b b b b b b 
+1 1 1 1 1 b b b b b b b b b b b 
+b b b b 1 1 1 1 1 1 1 b b b b b 
+b b b b b b b b b b 1 1 1 1 1 1 
+`, false)
+        scene.setTile(1, img`
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e f f f f f f e e e f f e e e e 
+f f e e e e f f f f f e f f f f 
+f e e e e e e e e e 3 3 e e e e 
+e e e e 3 e e e e e e 3 3 3 e e 
+e e e e 3 3 e e e e e e e 3 3 e 
+f e e e e 3 3 e e e e e e e e e 
+f f f f f f 3 f f f f f f f f f 
+e e e e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+e e 3 e e e e e e 3 f f f e e e 
+f f 3 f f f f 3 3 3 f e f f f f 
+e e 3 e e e e e e e e e e e e e 
+e e 3 e e e e e e e e e e e e e 
+e e e e e e e e e e e e e e e e 
+`, false)
+    }
 }
 function key_3 () {
     kay_3 = sprites.create(img`
@@ -473,7 +519,7 @@ function key_3 () {
 `, SpriteKind.Food)
     kay_3.setPosition(500, 625)
     kay_3.say("Key 3")
-    kay_3.setKind(SpriteKind.Food)
+    kay_3.setKind(SpriteKind.key)
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
@@ -719,8 +765,8 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
-let kay_3: Sprite = null
 let kays_2: Sprite = null
+let kay_3: Sprite = null
 let kays: Sprite = null
 let Carlos: Sprite = null
 let Villan: Sprite = null
