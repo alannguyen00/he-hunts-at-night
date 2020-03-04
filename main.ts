@@ -38,52 +38,6 @@ e e e e e e e e e e e e e e e e
 e e e e e e e e e e e e e f e e 
 `
 }
-function key_3 () {
-    kay_3 = sprites.create(img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . 1 . . . . 1 1 . . . 
-. . . . . . 1 1 . . 1 1 . . . . 
-. . . 1 1 . . . . . . . . 1 . . 
-. . . . 1 1 . . . . . . 1 1 . . 
-. . . . . . 5 . . . . . . . . . 
-. 1 1 . . 5 . 5 5 5 5 . . . . . 
-. . . . . . 5 . . . 5 . . . . . 
-. . . . . . . . . . . . 1 . . . 
-. . . 1 . . . . . . . . . 1 . . 
-. . 1 1 . . . . . . . . . . 1 . 
-. 1 1 . . . . 1 1 . . . . . . . 
-. . . . . . . . . 1 1 . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`, SpriteKind.Food)
-    kay_3.setPosition(500, 625)
-    kay_3.say("Key 3")
-    kay_3.setKind(SpriteKind.Food)
-}
-function key_2 () {
-    kays_2 = sprites.create(img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . 1 . . . . 1 1 . . . 
-. . . . . . 1 1 . . 1 1 . . . . 
-. . . 1 1 . . . . . . . . 1 . . 
-. . . . 1 1 . . . . . . 1 1 . . 
-. . . . . . 5 . . . . . . . . . 
-. 1 1 . . 5 . 5 5 5 5 . . . . . 
-. . . . . . 5 . . . 5 . . . . . 
-. . . . . . . . . . . . 1 . . . 
-. . . 1 . . . . . . . . . 1 . . 
-. . 1 1 . . . . . . . . . . 1 . 
-. 1 1 . . . . 1 1 . . . . . . . 
-. . . . . . . . . 1 1 . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`, SpriteKind.Food)
-    kays_2.setPosition(100, 550)
-    kays_2.say("Key 2")
-    kays_2.setKind(SpriteKind.Food)
-}
 function bad_guy () {
     Villan = sprites.create(img`
 . . . . . . 1 1 1 1 1 1 1 . . . . 
@@ -475,6 +429,52 @@ function key_1 () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     info.changeScoreBy(1)
 })
+function key_2 () {
+    kays_2 = sprites.create(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . 1 . . . . 1 1 . . . 
+. . . . . . 1 1 . . 1 1 . . . . 
+. . . 1 1 . . . . . . . . 1 . . 
+. . . . 1 1 . . . . . . 1 1 . . 
+. . . . . . 5 . . . . . . . . . 
+. 1 1 . . 5 . 5 5 5 5 . . . . . 
+. . . . . . 5 . . . 5 . . . . . 
+. . . . . . . . . . . . 1 . . . 
+. . . 1 . . . . . . . . . 1 . . 
+. . 1 1 . . . . . . . . . . 1 . 
+. 1 1 . . . . 1 1 . . . . . . . 
+. . . . . . . . . 1 1 . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, SpriteKind.Food)
+    kays_2.setPosition(100, 550)
+    kays_2.say("Key 2")
+    kays_2.setKind(SpriteKind.Food)
+}
+function key_3 () {
+    kay_3 = sprites.create(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . 1 . . . . 1 1 . . . 
+. . . . . . 1 1 . . 1 1 . . . . 
+. . . 1 1 . . . . . . . . 1 . . 
+. . . . 1 1 . . . . . . 1 1 . . 
+. . . . . . 5 . . . . . . . . . 
+. 1 1 . . 5 . 5 5 5 5 . . . . . 
+. . . . . . 5 . . . 5 . . . . . 
+. . . . . . . . . . . . 1 . . . 
+. . . 1 . . . . . . . . . 1 . . 
+. . 1 1 . . . . . . . . . . 1 . 
+. 1 1 . . . . 1 1 . . . . . . . 
+. . . . . . . . . 1 1 . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, SpriteKind.Food)
+    kay_3.setPosition(500, 625)
+    kay_3.say("Key 3")
+    kay_3.setKind(SpriteKind.Food)
+}
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     Carlos,
@@ -719,11 +719,11 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+let kay_3: Sprite = null
+let kays_2: Sprite = null
 let kays: Sprite = null
 let Carlos: Sprite = null
 let Villan: Sprite = null
-let kays_2: Sprite = null
-let kay_3: Sprite = null
 main_character()
 background()
 bad_guy()
