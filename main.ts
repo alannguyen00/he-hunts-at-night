@@ -1,5 +1,7 @@
 namespace SpriteKind {
     export const key = SpriteKind.create()
+    export const key2 = SpriteKind.create()
+    export const key3 = SpriteKind.create()
 }
 namespace myTiles {
     //% blockIdentity=images._tile
@@ -41,6 +43,10 @@ e e e e e e e e e e e e e e e e
 e e e e e e e e e e e e e f e e 
 `
 }
+sprites.onOverlap(SpriteKind.Player, SpriteKind.key3, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+    kay_3.destroy()
+})
 function bad_guy () {
     Villan = sprites.create(img`
 . . . . . . 1 1 1 1 1 1 1 . . . . 
@@ -85,10 +91,9 @@ function main_character () {
 . . . . . 8 8 . 8 8 . . . . . . . 
 . . . . f f f . f f f . . . . . . 
 `, SpriteKind.Player)
-    controller.moveSprite(Carlos, 65, 65)
+    controller.moveSprite(Carlos, 70, 70)
     Carlos.setPosition(400, 750)
     Carlos.setKind(SpriteKind.Player)
-    info.setLife(5)
     scene.cameraFollowSprite(Carlos)
 }
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -275,6 +280,10 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.key2, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+    kays_2.destroy()
+})
 function background () {
     scene.setTileMap(img`
 f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f 
@@ -364,6 +373,64 @@ f f f f f f f f f f f f f f f f
 e e e e e e e e e e e e e e f f 
 e e e e e f e e e e e e e e e e 
 `, false)
+}
+sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+    Carlos.destroy()
+    main_character()
+    Villan.follow(Carlos)
+})
+function key_1 () {
+    kays = sprites.create(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . 1 . . . . 1 1 . . . 
+. . . . . . 1 1 . . 1 1 . . . . 
+. . . 1 1 . . . . . . . . 1 . . 
+. . . . 1 1 . . . . . . 1 1 . . 
+. . . . . . 5 . . . . . . . . . 
+. 1 1 . . 5 . 5 5 5 5 . . . . . 
+. . . . . . 5 . . . 5 . . . . . 
+. . . . . . . . . . . . 1 . . . 
+. . . 1 . . . . . . . . . 1 . . 
+. . 1 1 . . . . . . . . . . 1 . 
+. 1 1 . . . . 1 1 . . . . . . . 
+. . . . . . . . . 1 1 . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, SpriteKind.key)
+    kays.setPosition(500, 400)
+    kays.say("Key 1")
+    kays.setKind(SpriteKind.key)
+}
+sprites.onOverlap(SpriteKind.Player, SpriteKind.key, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+    kays.destroy()
+})
+function key_2 () {
+    kays_2 = sprites.create(img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . 1 . . . . 1 1 . . . 
+. . . . . . 1 1 . . 1 1 . . . . 
+. . . 1 1 . . . . . . . . 1 . . 
+. . . . 1 1 . . . . . . 1 1 . . 
+. . . . . . 5 . . . . . . . . . 
+. 1 1 . . 5 . 5 5 5 5 . . . . . 
+. . . . . . 5 . . . 5 . . . . . 
+. . . . . . . . . . . . 1 . . . 
+. . . 1 . . . . . . . . . 1 . . 
+. . 1 1 . . . . . . . . . . 1 . 
+. 1 1 . . . . 1 1 . . . . . . . 
+. . . . . . . . . 1 1 . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`, SpriteKind.key)
+    kays_2.setPosition(100, 550)
+    kays_2.say("Key 2")
+    kays_2.setKind(SpriteKind.key2)
+}
+function Key_unlocks () {
     scene.setTile(7, img`
 b b b b b b b b b b b b b b b b 
 b b b b b b b b b b b b b b b b 
@@ -400,65 +467,6 @@ e e 3 e e e e e e e e e e e e e
 e e 3 e e e e e e e e e e e e e 
 e e e e e e e e e e e e e e e e 
 `, true)
-}
-sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
-    Carlos.destroy()
-    info.changeLifeBy(-1)
-    Carlos.setPosition(400, 750)
-})
-function key_1 () {
-    kays = sprites.create(img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . 1 . . . . 1 1 . . . 
-. . . . . . 1 1 . . 1 1 . . . . 
-. . . 1 1 . . . . . . . . 1 . . 
-. . . . 1 1 . . . . . . 1 1 . . 
-. . . . . . 5 . . . . . . . . . 
-. 1 1 . . 5 . 5 5 5 5 . . . . . 
-. . . . . . 5 . . . 5 . . . . . 
-. . . . . . . . . . . . 1 . . . 
-. . . 1 . . . . . . . . . 1 . . 
-. . 1 1 . . . . . . . . . . 1 . 
-. 1 1 . . . . 1 1 . . . . . . . 
-. . . . . . . . . 1 1 . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`, SpriteKind.key)
-    kays.setPosition(500, 400)
-    kays.say("Key 1")
-    kays.setKind(SpriteKind.Food)
-}
-sprites.onOverlap(SpriteKind.Player, SpriteKind.key, function (sprite, otherSprite) {
-    info.changeScoreBy(1)
-    kay_3.destroy()
-    kays_2.destroy()
-    kays.destroy()
-})
-function key_2 () {
-    kays_2 = sprites.create(img`
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . 1 . . . . 1 1 . . . 
-. . . . . . 1 1 . . 1 1 . . . . 
-. . . 1 1 . . . . . . . . 1 . . 
-. . . . 1 1 . . . . . . 1 1 . . 
-. . . . . . 5 . . . . . . . . . 
-. 1 1 . . 5 . 5 5 5 5 . . . . . 
-. . . . . . 5 . . . 5 . . . . . 
-. . . . . . . . . . . . 1 . . . 
-. . . 1 . . . . . . . . . 1 . . 
-. . 1 1 . . . . . . . . . . 1 . 
-. 1 1 . . . . 1 1 . . . . . . . 
-. . . . . . . . . 1 1 . . . . . 
-. . . . . . . . . . . . . . . . 
-. . . . . . . . . . . . . . . . 
-`, SpriteKind.key)
-    kays_2.setPosition(100, 550)
-    kays_2.say("Key 2")
-    kays_2.setKind(SpriteKind.Food)
-}
-function Key_unlocks () {
     if (info.score() == 3) {
         scene.setTile(7, img`
 b b b b b b b b b b b b b b b b 
@@ -477,24 +485,6 @@ b b b b b b b b b b b b b b b b
 1 1 1 1 1 b b b b b b b b b b b 
 b b b b 1 1 1 1 1 1 1 b b b b b 
 b b b b b b b b b b 1 1 1 1 1 1 
-`, false)
-        scene.setTile(1, img`
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e f f f f f f e e e f f e e e e 
-f f e e e e f f f f f e f f f f 
-f e e e e e e e e e 3 3 e e e e 
-e e e e 3 e e e e e e 3 3 3 e e 
-e e e e 3 3 e e e e e e e 3 3 e 
-f e e e e 3 3 e e e e e e e e e 
-f f f f f f 3 f f f f f f f f f 
-e e e e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
-e e 3 e e e e e e 3 f f f e e e 
-f f 3 f f f f 3 3 3 f e f f f f 
-e e 3 e e e e e e e e e e e e e 
-e e 3 e e e e e e e e e e e e e 
-e e e e e e e e e e e e e e e e 
 `, false)
     }
 }
@@ -519,7 +509,7 @@ function key_3 () {
 `, SpriteKind.Food)
     kay_3.setPosition(500, 625)
     kay_3.say("Key 3")
-    kay_3.setKind(SpriteKind.key)
+    kay_3.setKind(SpriteKind.key3)
 }
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
@@ -765,18 +755,20 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
-let kays_2: Sprite = null
-let kay_3: Sprite = null
 let kays: Sprite = null
+let kays_2: Sprite = null
 let Carlos: Sprite = null
 let Villan: Sprite = null
+let kay_3: Sprite = null
 main_character()
 background()
 bad_guy()
 key_1()
 key_2()
 key_3()
+Key_unlocks()
 info.setScore(0)
+info.setLife(5)
 forever(function () {
-    music.playMelody("E B C5 A B G A F ", 120)
+	
 })
